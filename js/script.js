@@ -97,3 +97,38 @@ function ibg(){
 }
     
 ibg();
+
+
+// Team Slick slider
+
+
+
+
+  $(document).ready(function(){
+    $('.team__content').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        responsive: [
+            {
+              breakpoint: 1160,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+              }
+            },{
+                breakpoint: 770,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+        ]
+    });
+});
