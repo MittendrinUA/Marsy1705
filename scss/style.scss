@@ -4,6 +4,10 @@
 
 @mixin flexbox {display: flex;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox; font-size: 0;}
 
+html {
+    scroll-behavior: smooth; /* свойство scroll-behavior не наследуется, применяется к прокручиваемым блокам */ 
+}
+
 body {
     font-family: 'Open Sans', sans-serif; 
 }
@@ -38,13 +42,16 @@ body {
 ._lock {
     overflow: hidden;
 }
-
+.out {
+    transform: translateY(-100%);
+}
 .header {
     position: fixed;
     z-index: 3;
     background:#fff;
     width: 100%;
     box-shadow: 0px 0px 10px 1px rgba(0,0,0, 0.10);
+    transition: all 0.3s ease 0s;
     &__body {
         @include flexbox();
         align-items: center;
@@ -637,6 +644,9 @@ body {
         &__body {
             padding: 55px 0 40px;
         }
+        &__content {
+            margin-top: 40px;
+        }
         &__item:hover &__btn {
             border-color: #fff;
             color: #fff;
@@ -946,6 +956,9 @@ body {
             flex-direction: column;
             align-items: center;
         }
+        &__item:first-child {
+            margin-top: 0;
+        }
         &__item:first-child,
         &__item:last-child {
             margin-right: 0;
@@ -954,6 +967,7 @@ body {
         &__item {
             width: calc(75% - 20px - 190px);
             background-size: 100% 235px;
+            margin-top: 15px;
         }
         &__btn {
             width: auto;
@@ -1181,6 +1195,10 @@ body {
             width: 290px;
             min-height: 290px;
         }
+        &__date,
+        &__dev {
+            font-size: 14px;
+        }
         &__info {
             width: 100%;
             margin-left: 0;
@@ -1192,6 +1210,199 @@ body {
         &__btn {
             margin-top: 0;
         }
+    }
+}
+
+.cont {
+    padding: 175px 0 125px;
+    background-color: #212121;
+    &__body {
+        text-align: center;
+    }
+    &__title,
+    &__text {
+        color: #fff;
+    }
+    &__btns {
+        margin-top: 100px;
+        padding: 0 43px;
+        @include flexbox();
+        justify-content: space-between;
+    }
+    &__item {
+        @include flexbox();
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    &__icon {
+        width: 106px;
+        height: 106px;
+        display: block;
+        border-radius: 50%;
+        background-color: #3949ab;
+        position: relative;
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    @keyframes hoverImg {
+        0% {
+        transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        }
+        100% {
+        transform: translate(-50%, -50%) scale(1);
+        }
+    }
+    &__icon:hover img {
+        animation: hoverImg 0.4s;
+    }
+    &__descr {
+        display: block;
+        max-width: 255px;
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: #ffffff;
+        text-decoration: none;
+    }
+    &__descr-first {
+        margin-top: 35px;
+    }
+    &__descr:hover {
+        text-decoration: underline;
+    }
+    form {
+        margin-top: 75px;
+        input {
+            display: block;
+            width: calc(50% - 15px - 42px - 4px);
+            float: right;
+            padding: 35px 21px;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: rgba(33, 33, 33, 0.8);
+            border: 2px solid transparent;
+            border-radius: 10px;
+        }
+        input:focus,
+        textarea:focus {
+            border: 2px solid #3949ab;
+        }
+        input::placeholder,
+        textarea::-webkit-input-placeholder,
+        textarea::-moz-placeholder,
+        textarea::-ms-input-placeholder {
+            font-family: 'Open Sans';
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: rgba(33, 33, 33, 0.8);
+        } 
+        textarea {
+            font-family: Open Sans;
+            border: 2px solid transparent;
+            margin-top: 30px;
+            width: calc(100% - 42px - 4px);
+            min-height: calc(323px - 70px);
+            padding: 35px 21px;
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: rgba(33, 33, 33, 1);
+            border-radius: 10px;
+            resize: none;
+        }
+        button {
+            width: 216px;
+            height: 70px;
+            margin-top: 30px;
+            float: right;
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            text-transform: uppercase;
+            font-family: Roboto;
+            font-size: 20px;
+            line-height: 22px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #212121;
+            transition: all 0.3s ease 0s;
+        }
+        button:hover {
+            border: 2px solid #3949ab;
+        }
+    }
+    &__name {
+        margin-left: 30px;
+    }
+    @media (max-width:920px) {
+        padding: 55px 0 130px;
+        &__btns {
+            margin-top: 50px;
+        }
+        &__descr {
+            display: none;
+        }
+        form {
+            margin-top: 40px;
+            input {
+                width: calc(100% - 42px - 4px);
+            }
+            textarea {
+                margin-top: 15px;
+            }
+            button {
+                margin-top: 15px;
+            }
+        }
+        &__name {
+            margin-left: 0;
+        }
+        &__email {
+            margin-top: 15px;
+        }
+    }
+    @media (max-width:500px) {
+        &__btns {
+            padding: 0;
+        }
+        &__item {
+            margin: 0 10px;
+        }
+        &__icon {
+            width: 75px;
+            height: 75px;
+            img {
+                width: 45px;
+            }
+        }
+        &__item:first-child &__icon img {
+            width: 35px;
+        }
+    }
+ 
+}
+
+.footer {
+    padding: 22px;
+    text-align: center;
+    p {
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #212121;
     }
 }
 

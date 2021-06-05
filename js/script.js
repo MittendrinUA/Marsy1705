@@ -56,7 +56,6 @@ if (iconMenu) {
 }
 
 // Search form (with button)
-
 const searchBtn = document.querySelector('.header__search');
 const searchForm = document.querySelector('.header__form');
 const formBtn = document.querySelector('.form-btn');
@@ -86,7 +85,6 @@ document.addEventListener('click', function(e) {
 
 
 // IBG
-
 function ibg(){
     let ibg=document.querySelectorAll(".ibg");
     for (var i = 0; i < ibg.length; i++) {
@@ -99,11 +97,35 @@ function ibg(){
 ibg();
 
 
+// Прокрутка при клике
+const menuLinks = document.querySelectorAll('.menu__link[data-goto]');
+if (menuLinks.length > 0) {
+    menuLinks.forEach(menuLink => {
+        menuLink.addEventListener("click", onMenuLinkClick);
+    });
+
+    function onMenuLinkClick(e) {
+        const menuLink = e.target;
+        if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
+            const gotoBlock = document.querySelector(menuLink.dataset.goto);
+            const gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset;
+
+            if (iconMenu.classList.contains('_active')) {
+                document.body.classList.remove('_lock');
+                iconMenu.classList.remove('_active');
+                menuBody.classList.remove('_active');
+            }
+
+            window.scrollTo({
+                top: gotoBlockValue,
+                behavior: "smooth",
+            });
+            e.preventDefault();
+        }
+    }
+}
+
 // Team Slick slider
-
-
-
-
   $(document).ready(function(){
     $('.team__content').slick({
         infinite: true,
@@ -131,4 +153,19 @@ ibg();
               }
         ]
     });
+});
+
+// скрываем меню при прокрутке вниз
+var header = $('.header'),
+	scrollPrev = 0;
+
+$(window).scroll(function() {
+	var scrolled = $(window).scrollTop();
+ 
+	if ( scrolled > 100 && scrolled > scrollPrev ) {
+		header.addClass('out');
+	} else {
+		header.removeClass('out');
+	}
+	scrollPrev = scrolled;
 });
