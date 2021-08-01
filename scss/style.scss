@@ -328,9 +328,12 @@ body {
     &__bg {
         position: absolute;
         width: 100%;
-        min-height: 100vh;
+        height: 100vh;
         z-index: 1;
         background-position: top;
+        @media (max-height: 700px) {
+            min-height: 700px;
+        }
     }
     &__body {
         @include flexbox ();
@@ -341,8 +344,11 @@ body {
         align-items: center;
         text-align: center;
         width: 100%;
-        min-height: 100vh;
+        height: 100vh;
         background: rgba(0,0,0,0.9);
+        @media (max-height: 700px) {
+            min-height: 700px;
+        }
         h1 {
             font-size: 60px;
             font-weight: 600;

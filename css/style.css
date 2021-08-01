@@ -389,9 +389,15 @@ body {
 .intro__bg {
   position: absolute;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   z-index: 1;
   background-position: top;
+}
+
+@media (max-height: 700px) {
+  .intro__bg {
+    min-height: 700px;
+  }
 }
 
 .intro__body {
@@ -413,8 +419,14 @@ body {
           align-items: center;
   text-align: center;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.9);
+}
+
+@media (max-height: 700px) {
+  .intro__body {
+    min-height: 700px;
+  }
 }
 
 .intro__body h1 {
